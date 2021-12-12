@@ -1,19 +1,37 @@
+# Current Functional model without DP
 # Finish rest of MP3 /finish DP for MP2
 # Implement the save/load functions on MyFunction.py with this list without breaking other inputs. (touch up on data persistance)  
 
-from input import couriers
-from input import products
-from input import orders
+
+def read_products(filename, list):
+    with open('products.txt', 'r') as products_txt:
+        contents = products_txt.readlines()
+        for line in contents:  
+            products.append(line.strip())
 
 
+def read_couriers(filename, list):
+    with open('couriers.txt', 'r') as couriers_txt:
+        contents = couriers_txt.readlines()
+        for line in contents:  
+            couriers.append(line.strip())
 
-with open('couriers.txt', 'r') as reader:
-    load_couriers = reader.read()
+def save_products(filename: str, products: list[str]) -> None:
+    with open("products.txt",'w') as couriers_txt:
+        for product in products:
+            couriers_txt.write(f"{product}\n")
 
-with open('products.txt', 'r') as reader:
-    load_products = reader.readline()
+def save_couriers(filename: str, couriers: list[str]) -> None:
+    with open("couriers.txt",'w') as couriers_txt:
+        for courier in couriers:
+            couriers_txt.write(f"{courier}\n")
+
+products = []
+couriers = []
 
 
+read_products("products.txt", products)
+read_couriers("couriers.txt", couriers)
 
 while True:
     try:
@@ -25,20 +43,10 @@ while True:
         main_menu = int(input('>>> '))
         if main_menu == 0:
             print("--------"'\n'"Application Terminated and Information saved"'\n'"--------"'\n')
-            try:
-                file = open('couriers.txt', 'w')
-                for person in couriers:
-                    file.write(person + '\n')
-            finally:
-                file.close()
-
-            try:
-                file = open('products.txt', 'w')
-                for product in products:
-                    file.write(product + '\n')
-            finally:
-                    file.close()
+            save_couriers('couriers.txt', couriers)
+            save_products('products.txt', products)
             quit()
+            break
         elif main_menu == 1:
             print('Product Menu Option')
         elif main_menu == 2:
@@ -56,10 +64,11 @@ while True:
             while True:
                 product_menu = int(input('Enter a input for the Products Menu: '))
                 if product_menu == 0:
-                    break
+                        break
                 elif product_menu == 1:
-                    print('---------')
-                    print('\n'.join(products),'\n''---------')
+                        products1 = sorted(products)
+                        print('---------')
+                        print('\n'.join(products1),'\n''---------')
                 elif product_menu == 2:
                     new_product = (input("Enter new product name: "))
                     products.append(new_product)
