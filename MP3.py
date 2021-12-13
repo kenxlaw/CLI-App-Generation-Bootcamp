@@ -1,37 +1,21 @@
-# Current Functional model without DP
-# Finish rest of MP3 /finish DP for MP2
-# Implement the save/load functions on MyFunction.py with this list without breaking other inputs. (touch up on data persistance)  
+# Finish rest of MP3
+# Create more Functions for cleaner code
+# 3.1 needs better read format but it is reading from .csv file
+# Create a working function for 3.2 onwards. Myfunction broke the inputs.
 
-
-def read_products(filename, list):
-    with open('products.txt', 'r') as products_txt:
-        contents = products_txt.readlines()
-        for line in contents:  
-            products.append(line.strip())
-
-
-def read_couriers(filename, list):
-    with open('couriers.txt', 'r') as couriers_txt:
-        contents = couriers_txt.readlines()
-        for line in contents:  
-            couriers.append(line.strip())
-
-def save_products(filename: str, products: list[str]) -> None:
-    with open("products.txt",'w') as couriers_txt:
-        for product in products:
-            couriers_txt.write(f"{product}\n")
-
-def save_couriers(filename: str, couriers: list[str]) -> None:
-    with open("couriers.txt",'w') as couriers_txt:
-        for courier in couriers:
-            couriers_txt.write(f"{courier}\n")
+import MyFunctions
 
 products = []
 couriers = []
+orders = {}
 
+try:
+    MyFunctions.read_products("products.txt", products)
+    MyFunctions.read_couriers("couriers.txt", couriers)
+    #MyFunctions.write_orders("new_orders.csv", orders)
+except FileNotFoundError as f:
+    print("Basic Load Files do not exist on the directory")
 
-read_products("products.txt", products)
-read_couriers("couriers.txt", couriers)
 
 while True:
     try:
@@ -43,8 +27,8 @@ while True:
         main_menu = int(input('>>> '))
         if main_menu == 0:
             print("--------"'\n'"Application Terminated and Information saved"'\n'"--------"'\n')
-            save_couriers('couriers.txt', couriers)
-            save_products('products.txt', products)
+            MyFunctions.save_couriers('couriers.txt', couriers)
+            MyFunctions.save_products('products.txt', products)
             quit()
             break
         elif main_menu == 1:
@@ -152,17 +136,9 @@ while True:
                 if orders_menu == 0:
                         break
                 elif orders_menu == 1:
-                    print(orders)
+                    MyFunctions.read_orders("orders.csv", orders)
                 elif orders_menu == 2:
-                    print('Customer Name:', orders['customer_name'])
-                    print('Address:', orders['customer_address'])
-                    print('Phone Number:', orders['customer_phone'],'\n')
-                    print('Choose a Courier')
-                    print(list(enumerate(couriers)))
-                    index = int(input("Select the number corresponding to the courier you would like to select: "))
-                    print(f'You have chosen {couriers[index]} for dispatch')
-                    #orders.append(order list)
-                    print("Order Status: 'PREPARING'")
+                    #redo
                     break
                 elif orders_menu == 3:
                     #orders.append(orders)
@@ -170,17 +146,17 @@ while True:
                 elif orders_menu == 4:
                     print('update an existing order')
                 elif orders_menu == 5:
-                    while True:
-                        try:
-                            print(couriers)
-                            del_input = input('Enter the name of the courier you wish to delete: ')
-                            couriers.remove(del_input)
-                            print(couriers)
-                            print(f'<{del_input}> has now been deleted from the couriers list.')
-                            break
-                        except ValueError as e:
-                            print('Please enter the correct input from the list of couriers')
-                            break
+                    #while True:
+                    #    try:
+                    #        print(couriers)
+                    #        del_input = input('Enter the name of the courier you wish to delete: ')
+                    #        couriers.remove(del_input)
+                    #        print(couriers)
+                    #        print(f'<{del_input}> has now been deleted from the couriers list.')
+                    #        break
+                    #    except ValueError as e:
+                    #        print('Please enter the correct input from the list of couriers')
+                    #        break
                     break
         else:
             print('Input is not recognised')
