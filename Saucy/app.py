@@ -1,7 +1,5 @@
 # Finish rest of MP3
-# Create more Functions for cleaner code
-# 3.1 needs better read format but it is reading from .csv file
-# Create a working function for 3.2 onwards. Myfunction broke the inputs.
+# Create a working save function for 3.2, it wipes user data but the header still remains.
 import MyFunctions
 
 products = []
@@ -11,6 +9,7 @@ orders = {}
 try:
     MyFunctions.read_txt("products.txt", products)
     MyFunctions.read_txt("couriers.txt", couriers)
+    #MyFunctions.read_dict('W3OrdersDict.txt', orders)
 except FileNotFoundError as f:
     print("Basic Load Files do not exist on the directory")
 
@@ -48,7 +47,7 @@ while True:
                 if product_menu == 0:
                         break
                 elif product_menu == 1:
-                    MyFunctions.printer(products)
+                    MyFunctions.txt_printer(products)
                 elif product_menu == 2:
                     MyFunctions.create(products)
                 elif product_menu == 3:
@@ -65,7 +64,7 @@ while True:
                 if couriers_menu == 0:
                         break
                 elif couriers_menu == 1:
-                    MyFunctions.printer(couriers)
+                    MyFunctions.txt_printer(couriers)
                 elif couriers_menu == 2:
                     MyFunctions.create(couriers)
                 elif couriers_menu == 3:
@@ -82,10 +81,12 @@ while True:
                 if orders_menu == 0:
                         break
                 elif orders_menu == 1:
-                    MyFunctions.read_orders("orders.csv", orders)
+                    MyFunctions.csv_W3printer('orders.csv', orders)
                 elif orders_menu == 2:
-                    #redo
-                    break
+                    MyFunctions.csv_W3Custom_input(orders)
+                    MyFunctions.dispatch(couriers)
+                    MyFunctions.append_dict(orders)
+                    MyFunctions.save_csv('orders.csv', orders)
                 elif orders_menu == 3:
                     #orders.append(orders)
                     print('TBC')

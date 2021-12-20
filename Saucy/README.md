@@ -1,1 +1,1 @@
-Welcome to MiniProject
+Welcome to the MiniProject
