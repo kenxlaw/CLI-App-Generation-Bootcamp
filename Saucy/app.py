@@ -1,15 +1,15 @@
-# Finish rest of MP3
-# Create a working save function for 3.2, it wipes user data but the header still remains.
-import MyFunctions
+# Changed formatting
+# playing around with different potential approaches
 
-products = []
-couriers = []
-orders = {}
+import MyFunctions
+#import pandas as pd
+from MyFunctions import products, couriers, orders, order_status
 
 try:
     MyFunctions.read_txt("products.txt", products)
     MyFunctions.read_txt("couriers.txt", couriers)
-    #MyFunctions.read_dict('W3OrdersDict.txt', orders)
+    #orders = pd.read_csv('orders.csv')
+    MyFunctions.read_csv("orders.csv", orders)
 except FileNotFoundError as f:
     print("Basic Load Files do not exist on the directory")
 
@@ -19,15 +19,12 @@ while True:
         Main_menu = ["---------", "Main Menu" '\n', "3 - Orders Menu", "2 - Couriers Menu", "1 - Show Products Menu", "0 - Exit & Save", "---------"]
         for main_items in Main_menu:
             print(main_items)
-
-
         main_menu = int(input('>>> '))
         if main_menu == 0:
             print("--------"'\n'"Application Terminated and Information saved"'\n'"--------"'\n')
             MyFunctions.save_txt('couriers.txt', couriers)
             MyFunctions.save_txt('products.txt', products)
             quit()
-            break
         elif main_menu == 1:
             print('Product Menu Option')
         elif main_menu == 2:
@@ -81,19 +78,20 @@ while True:
                 if orders_menu == 0:
                         break
                 elif orders_menu == 1:
-                    MyFunctions.csv_W3printer('orders.csv', orders)
+                    MyFunctions.kwarg_printer(**orders)
                 elif orders_menu == 2:
                     MyFunctions.csv_W3Custom_input(orders)
                     MyFunctions.dispatch(couriers)
-                    MyFunctions.append_dict(orders)
-                    MyFunctions.save_csv('orders.csv', orders)
+                    print('ORDER STATUS = PREPARING')
+                    orders['status']= 'PREPARING'
+                    orders['orders']= '1'
                 elif orders_menu == 3:
-                    #orders.append(orders)
-                    print('TBC')
+                    MyFunctions.get_user_inputW3(orders, order_status)
                 elif orders_menu == 4:
-                    print('update an existing order')
+                    MyFunctions.input_4W3(orders)
                 elif orders_menu == 5:
-                    break
+                    MyFunctions.inputW3I5(orders)
+                    
         else:
             print('Input is not recognised')
             break
