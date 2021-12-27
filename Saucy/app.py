@@ -74,7 +74,7 @@ while True:
             for order_items in orders_menu:
                 print(order_items)
             while True:
-                orders_menu = int(input('>>>'))
+                orders_menu = int(input('>>> '))
                 if orders_menu == 0:
                         break
                 elif orders_menu == 1:
@@ -91,6 +91,7 @@ while True:
                     MyFunctions.input_4W3(orders)
                 elif orders_menu == 5:
                     MyFunctions.inputW3I5(orders)
+                    MyFunctions.stretchW3I5(orders)
                     
         else:
             print('Input is not recognised')

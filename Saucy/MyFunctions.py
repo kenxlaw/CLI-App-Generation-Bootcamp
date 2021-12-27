@@ -1,11 +1,9 @@
 import csv
 #import pandas #....may be the way...
 
-# very big band aid here for the rest of MP3 using (list(enumarate)) to show index for all options as opposed to specific.
-# despite w3 spec saying print orders list with index, end result on terminal always looks clunky.
-# Focused on one default order only, will probably need some kind of get_index function to resolve this.
 # Running into an issue in trying to delete a dictionary key and value at the same time. (may be due to embeded dict?!?)
-# Also loading .csv files through import function is a current nightmare.                          
+# Also loading .csv files through import function is a current nightmare.
+# Needs some more try:except clean up                  
 
 #Data Persistance
 
@@ -127,44 +125,48 @@ def dispatch(content):
 
 
 def get_user_inputW3(content,content2):
-    print(list(enumerate(content)))
+    get_index(content)
     index = int(input('Press 4 to UPDATE order Status: '))
     print(list(enumerate(content2)))
     update = int(input('Update the ORDER STATUS using the option above: '))
     content['status'] = content2[update]
-
+    print(f'order status set to {content2[update]}')
 
 def input_4W3(content):
     print(list(enumerate(content)))
     index =int(input('Choose which option you would like to update: '))
     if index == 0:
         print(content['customer_name'])
-        update = input('Update customer name: ')
+        update = input('Update customer name to: ')
         content['customer_name'] = update
         print(content)
     elif index == 1:
         print(content['customer_address'])
-        update = input('Update customer address: ')
+        update = input('Update customer address to: ')
         content['customer_address'] = update
         print(content)
     elif index == 2:
         print(content['customer_phone'])
-        update = input('Update customer phone number: ')
+        update = input('Update customer phone number to: ')
         content['customer_phone'] = update
         print(content)
     elif index == 3:
         print(content['courier'])
-        update = input('Update courier: ')
+        update = input('Update courier to: ')
         content['courier'] = update
         print(content)
     elif index == 4:
         print(content['status'])
-        update = input('update delivery status: ')
+        update = input('update delivery status to: ')
         content['status'] = update
         print(content)
+    elif index == 5:
+        print(content['orders'])
+        update = input('update order status to: ')
+        content['orders'] = update
 
 def inputW3I5(content):
-    print(content)
+    get_index(content)
     orders = input("type 'delete' to remove order: ")
     if orders == 'delete':
         content['orders']= ''
@@ -173,7 +175,7 @@ def inputW3I5(content):
 
 
 def stretchW3I5(content):
-    print(list(enumerate(content, start=-2)))
+    get_index(content)
     update = input('Press 1 to delete a courier: ')
     print(content['courier'])
     delete = int(input('Type in the number of the courier you wish to delete: '))
@@ -192,5 +194,9 @@ def kwarg_printer(**kwargs):
         print(key,': ',value)
 #At some point I want to implement more Kwargs for better effiiency
 
+#def get_index(content):
+    #list.index(content)
+
 def get_index(content):
-    list.index(content)
+    for content, index in enumerate(orders):
+        print(content, index)
