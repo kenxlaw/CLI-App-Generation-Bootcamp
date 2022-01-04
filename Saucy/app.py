@@ -1,15 +1,12 @@
-# Changed formatting
-# playing around with different potential approaches
-
-import MyFunctions
-#import pandas as pd
-from MyFunctions import products, couriers, orders, order_status
+from MyFunctions import delete
+import function
+from function import products, couriers, orders, order_status
+import csv
 
 try:
-    MyFunctions.read_txt("products.txt", products)
-    MyFunctions.read_txt("couriers.txt", couriers)
-    #orders = pd.read_csv('orders.csv')
-    MyFunctions.read_csv("orders.csv", orders)
+    function.read_csv("products.csv", products)
+    function.read_csv("couriers.csv", couriers)
+    function.read_csv("orders.csv", orders)
 except FileNotFoundError as f:
     print("Basic Load Files do not exist on the directory")
 
@@ -22,8 +19,9 @@ while True:
         main_menu = int(input('>>> '))
         if main_menu == 0:
             print("--------"'\n'"Application Terminated and Information saved"'\n'"--------"'\n')
-            MyFunctions.save_txt('couriers.txt', couriers)
-            MyFunctions.save_txt('products.txt', products)
+            function.save_2csv('couriers.csv', couriers, 'name', 'phone' )
+            function.save_2csv('products.csv', products, 'name', 'price')
+            function.save_6csv('orders.csv', orders, 'customer_name', 'customer_address', 'customer_phone','courier', 'status', 'items')
             quit()
         elif main_menu == 1:
             print('Product Menu Option')
@@ -44,13 +42,13 @@ while True:
                 if product_menu == 0:
                         break
                 elif product_menu == 1:
-                    MyFunctions.txt_printer(products)
+                    function.p_printer(products)
                 elif product_menu == 2:
-                    MyFunctions.create(products)
+                    function.p_create(products)
                 elif product_menu == 3:
-                    MyFunctions.update(products)
+                    function.p_update(products)
                 elif product_menu == 4:
-                    MyFunctions.delete(products)
+                    function.delete(products)
     
         elif main_menu == 2:
             Couriers_menu = ["---------", 'Welcome to Couriers menu option:',"---------", '1 - List of couriers', '2 - Add a New Courier', '3 - Update an Existing Courier', '4 - Remove an Existing Courier', '0 - Exit to the Main Menu','---------']
@@ -61,13 +59,14 @@ while True:
                 if couriers_menu == 0:
                         break
                 elif couriers_menu == 1:
-                    MyFunctions.txt_printer(couriers)
+                    function.c_printer(couriers)
                 elif couriers_menu == 2:
-                    MyFunctions.create(couriers)
+                    function.c_create(couriers)
                 elif couriers_menu == 3:
-                    MyFunctions.update(couriers)
+                    pass
+                    #wip
                 elif couriers_menu == 4:
-                    MyFunctions.delete(couriers)
+                    function.delete(couriers)
     
         elif main_menu == 3:
             orders_menu = ["---------", 'Welcome to Orders Menu Option:',"---------", '1 - Orders Dictionary ', '2 - For Customers Information', '3 - Update an existing Order Status', '4 - Update an existing Order', '5 - Remove a courier', '0 - Exit to the Main Menu','---------']
@@ -78,20 +77,16 @@ while True:
                 if orders_menu == 0:
                         break
                 elif orders_menu == 1:
-                    MyFunctions.kwarg_printer(**orders)
+                    function.o_printer(orders)
                 elif orders_menu == 2:
-                    MyFunctions.csv_W3Custom_input(orders)
-                    MyFunctions.dispatch(couriers)
-                    print('ORDER STATUS = PREPARING')
-                    orders['status']= 'PREPARING'
-                    orders['orders']= '1'
+                    function.csv_W3Custom_input(orders)
+                    function.dispatch(couriers)
                 elif orders_menu == 3:
-                    MyFunctions.get_user_inputW3(orders, order_status)
+                    function.input3(orders, order_status)
                 elif orders_menu == 4:
-                    MyFunctions.input_4W3(orders)
+                    function.input_4W3(orders)
                 elif orders_menu == 5:
-                    MyFunctions.inputW3I5(orders)
-                    MyFunctions.stretchW3I5(orders)
+                    function.delete(orders)
                     
         else:
             print('Input is not recognised')
