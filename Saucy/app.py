@@ -1,7 +1,5 @@
-from MyFunctions import delete
 import function
 from function import products, couriers, orders, order_status
-import csv
 
 try:
     function.read_csv("products.csv", products)
@@ -63,13 +61,12 @@ while True:
                 elif couriers_menu == 2:
                     function.c_create(couriers)
                 elif couriers_menu == 3:
-                    pass
-                    #wip
+                    function.c_update(couriers)
                 elif couriers_menu == 4:
                     function.delete(couriers)
     
         elif main_menu == 3:
-            orders_menu = ["---------", 'Welcome to Orders Menu Option:',"---------", '1 - Orders Dictionary ', '2 - For Customers Information', '3 - Update an existing Order Status', '4 - Update an existing Order', '5 - Remove a courier', '0 - Exit to the Main Menu','---------']
+            orders_menu = ["---------", 'Welcome to Orders Menu Option:',"---------", '1 - Orders Dictionary ', '2 - For Customers Information', '3 - Update an Existing Order Status', '4 - Update an Existing Order', '5 - Remove a Order', '0 - Exit to the Main Menu','---------']
             for order_items in orders_menu:
                 print(order_items)
             while True:
@@ -79,12 +76,11 @@ while True:
                 elif orders_menu == 1:
                     function.o_printer(orders)
                 elif orders_menu == 2:
-                    function.csv_W3Custom_input(orders)
-                    function.dispatch(couriers)
+                    function.o_create(orders, couriers)
                 elif orders_menu == 3:
-                    function.input3(orders, order_status)
+                    function.o_updateOS(orders, order_status)
                 elif orders_menu == 4:
-                    function.input_4W3(orders)
+                    function.o_update(orders, couriers, order_status)
                 elif orders_menu == 5:
                     function.delete(orders)
                     

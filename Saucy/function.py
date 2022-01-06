@@ -1,15 +1,12 @@
 import csv
-#will change '[]' boxes on dictionary as new input turn into '[x]' but is functional.
+
+#ALL INPUT WORKS, Could do with some refining on the try/excepts while more value errors 
 
 products = []
 couriers = []
 orders = []
 
 order_status = ['CANCELLED', 'PREPARING', 'DISPATCHED', 'COMPLETED']
-
-products_dict = {'name': [], 'price': []}
-couriers_dict = {'name': [], 'phone': []}
-orders_dict = {'customer_name': [],'customer_address': [], 'customer_phone': [],'courier':[],'status': [], 'items': []}
 
 def read_csv(filename, csv_file):
     with open (filename, newline= '') as file:
@@ -33,9 +30,6 @@ def save_6csv(filename, list, f1, f2, f3, f4, f5, f6):
         for row in list:
             writer.writerow(row)
 
-#def printer(content):
-#      print(content)
-
 def p_printer(content):
     for row in content:
         print(row['name'],'-', row['price'])
@@ -46,41 +40,112 @@ def c_printer(content):
 
 def o_printer(content):
     for row in content:
-        print(row['customer_name'],'-', row['customer_address'], row['customer_phone'],'-', row['courier'],'-', row['status'], '/', row['items'])
+        print(row['customer_name'], '-', row['customer_address'], '-', row['customer_phone'],'-', row['courier'],'-', row['status'], '/', row['items'])
 
 def p_create(content):
     while True:
-        new_product = input('Enter New Product Name: ')
-        new_price = (input('Enter New Product Price: '))
-        products_dict['name'].append(new_product)
-        products_dict['price'].append(new_price)
-        content.append(products_dict)
+        try:
+            product_name = input('Enter New Product Name: ')
+            new_price = float(input('Enter New Product Price: '))
+            new_product = {'name': product_name, 'price': new_price}
+            content.append(new_product)
+        except Exception as e:
+            print("Error...Restarting")
         break
 
 def c_create(content):
-    new_courier = input('Enter New Courier Name: ')
-    new_number = input("Enter New Courier's Number: ")
-    couriers_dict['name'].append(new_courier)
-    couriers_dict['phone'].append(new_number)
-    content.append(couriers_dict)
+    while True:
+        try:
+            courier_name = input('Enter New Courier Name: ')
+            new_number = input("Enter New Courier's Number: ")
+            new_courier = {'name': courier_name, 'phone': new_number}
+            content.append(new_courier)
+        except Exception as e:
+            print("Error...Restarting")
+        break
 
-def p_update(content):
-    for key,value in content:
-        print(key, value)
-        
-    #get_index(content)
-    #WIP
+def o_create(content, content2):
+    while True:
+        try:
+            new_customer = input('Enter New Customer Name: ')
+            new_address = input("Please Provide An Address: ")
+            new_number = input("Enter New Customer's Number: ")
+
+            print(list(enumerate(content2)))
+            index = int(input("Select a Courier for dispatch: "))
+
+            new_order = {'customer_name': new_customer, 
+            'customer_phone': new_number, 
+            'customer_address': new_address, 
+            'courier': index, 
+            'status': 'PREPARING', 
+            'items': 'None'}
+            content.append(new_order)
+        except Exception as e:
+            print("Error...Returning to Product Menu")
+        break
+
+def p_update(product_list):
+    while True:
+        try:
+            for index, content in enumerate(product_list):
+                print(index, content)
+            list_index = int(input('Select option # >: '))
+            product_to_update = product_list[list_index]
+
+            print(product_to_update)
+
+            name_product = str(input('Update the Name to: '))
+            price_update = float(input('Update the Price to: '))
+            product_list[list_index] = {'name': name_product, 'phone': price_update}
+        except Exception as e:
+            print("Error...Restarting")
+        break
+
+def c_update(courier_list):
+    while True:
+        try:
+            for index, content in enumerate(courier_list):
+                print(index, content)
+            list_index = int(input('Select option # >: '))
+            courier_to_update= courier_list[list_index]
+
+            print(courier_to_update)
+
+            name_update = str(input('Update the Name to: '))
+            phone_update = str(input('Update the Phone # to: '))
+            courier_list[list_index] = {'name': name_update, 'phone': phone_update}
+        except Exception as e:
+            print("Error...Restarting")
+        break
+
+
+def o_updateOS(orders_list, orders_status):
+    while True:
+        try:
+            for index, content in enumerate(orders_list):
+                print(index, content)
+            list_index = int(input('Select option # to Update Order Status >: '))
+            update_order_status = orders_list[list_index]
+
+            print(update_order_status)
+
+            print(list(enumerate(orders_status)))
+            update_index = int(input('Update the ORDER STATUS using the option above: '))
+            orders_list[list_index]['status'] = orders_status[update_index]
+        except Exception as e:
+            print("Error...Restarting")
+        break
 
 def delete(content):
-    print(list(enumerate(content)))
-    delete = int(input('delete an order: '))
-    del content[delete]
-    
-
-def get_index(content):
-    for content, index in enumerate(content):
-        print(content, index)
-    
+    while True:
+        try:
+            print(list(enumerate(content)))
+            delete = int(input('delete an order: '))
+            del content[delete]
+        except Exception as e:
+            print("Error...Restarting")
+        break
 
 def dispatch(content):
     while True:    
@@ -92,9 +157,47 @@ def dispatch(content):
             print('Please enter the correct input from the list above')
         break
 
-def input3(content,content2):
-    get_index(content)
-    index = int(input('Select a number to UPDATE order Status: '))
-    print(list(enumerate(content2)))
-    update = int(input('Update the ORDER STATUS using the option above: '))
-    content['status'] = content2[update]
+def o_update(orders_list, couriers, order_status):
+    while True:
+        for index, content in enumerate(orders_list):
+            print(index, content)
+
+        list_index = int(input('Select option # >: '))
+        orders_to_update= orders_list[list_index]
+
+        print(orders_to_update)
+        cust_update = (input('Update the Name to: '))
+        if cust_update == "":
+            print('Cannot leave entry blank')
+            break
+        add_update = (input('Update the Address to: '))
+        if add_update == "":
+            print('Cannot leave entry blank')
+            break
+        phone_update = int(input('Update the Phone # to: '))
+        if phone_update == "":
+            print('Cannot leave entry blank')
+            break
+        print(list(enumerate(couriers)))
+        courier_update = int(input('Update the Courier # to: '))
+        if courier_update == "":
+            print('Cannot leave entry blank')
+            break
+        print(list(enumerate(order_status)))
+        status_update = int(input('Update the Order Status to: '))
+        if status_update == "":
+            print('Cannot leave entry blank')
+            break
+        items_update = (input('Update the items into: '))
+        if items_update == "":
+            print('Cannot leave entry blank')
+            break
+
+        orders_list[index] = {'customer_name': cust_update, 
+        'customer_phone': phone_update, 
+        'customer_address': add_update, 
+        'courier': courier_update, 
+        'status': order_status[status_update], 
+        'items': items_update}
+        break
+

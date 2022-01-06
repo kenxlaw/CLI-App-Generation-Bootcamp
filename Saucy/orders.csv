@@ -1,2 +1,4 @@
 customer_name,customer_address,customer_phone,courier,status,items
-John,"Unit 2, 12 Main Street, LONDON, WH1 2ER",0789887334,2,preparing,"1,3,4"
+John,"Unit 2, 12 Main Street, LONDON, WH1 2ER",0789887334,2,COMPLETED,"1,3,4"
+Billy,Kid St,1231231231,1,COMPLETED,1
+Freddo,10 Pence Street,666777888,1,DISPATCHED,None
