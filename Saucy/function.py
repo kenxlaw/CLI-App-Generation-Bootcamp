@@ -1,4 +1,7 @@
 import csv
+import pymysql
+
+
 
 #ALL INPUT WORKS, Could do with some refining on the try/excepts while more value errors 
 
@@ -8,23 +11,24 @@ orders = []
 
 order_status = ['CANCELLED', 'PREPARING', 'DISPATCHED', 'COMPLETED']
 
+
 def read_csv(filename, csv_file):
     with open (filename, newline= '') as file:
         reader = csv.DictReader(file)
         for row in reader:
             csv_file.append(row)
 
-def save_2csv(filename, list, fieldnames1, fieldnames2):
+def save_3csv(filename, list, fieldnames1, fieldnames2, f3):
     with open(filename, 'w') as csv_file:
-        fieldnames = [fieldnames1, fieldnames2]
+        fieldnames = [fieldnames1, fieldnames2, f3]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter= ',')
         writer.writeheader()
         for row in list:
             writer.writerow(row)
 
-def save_6csv(filename, list, f1, f2, f3, f4, f5, f6):
+def save_7csv(filename, list, f1, f2, f3, f4, f5, f6, f7):
     with open(filename, 'w') as csv_file:
-        fieldnames = [f1, f2, f3, f4, f5, f6]
+        fieldnames = [f1, f2, f3, f4, f5, f6, f7]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter= ',')
         writer.writeheader()
         for row in list:
