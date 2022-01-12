@@ -1,15 +1,18 @@
 import csv
-import pymysql
-
-
-
-#ALL INPUT WORKS, Could do with some refining on the try/excepts while more value errors 
+import os
+from pyfiglet import Figlet
+from colorama import init
+from colorama import Fore, Back, Style
+import loading_bars.loading_bars as bars
 
 products = []
 couriers = []
 orders = []
 
 order_status = ['CANCELLED', 'PREPARING', 'DISPATCHED', 'COMPLETED']
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def read_csv(filename, csv_file):
@@ -26,7 +29,7 @@ def save_3csv(filename, list, fieldnames1, fieldnames2, f3):
         for row in list:
             writer.writerow(row)
 
-def save_7csv(filename, list, f1, f2, f3, f4, f5, f6, f7):
+def save_7csv(filename, list, f1, f2, f3, f4, f5, f6, f7): #can use ** KWARGS here
     with open(filename, 'w') as csv_file:
         fieldnames = [f1, f2, f3, f4, f5, f6, f7]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter= ',')
