@@ -19,7 +19,7 @@ DB_orders = 'id, customer_name, customer_address, customer_phone, courier, statu
 DB_OS = 'orderid, status'
 DB_Pindex ='id, name'
 DB_Cindex = 'id, name'
-DB_Oindex = 'id, customer_name'
+DB_Oindex = 'id, customer_name, status'
 
 load_dotenv()
 host = os.environ.get("mysql_host")
@@ -32,26 +32,6 @@ user,
 password,
 database
 )
-
-
-def load_database(sql):
-    load_dotenv()
-    host = os.environ.get("mysql_host")
-    user = os.environ.get("mysql_user")
-    password = os.environ.get("mysql_pass")
-    database = os.environ.get("mysql_db")
-    connection = pymysql.connect(
-    host,
-    user,
-    password,
-    database
-    )
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    cursor.execute(f"SELECT * FROM {sql}")
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
-
 
 def execute_query(sql):
     try:
@@ -119,7 +99,7 @@ def update_product(field, table,id, name, price):
 
             bars.loading_info(info='Updating Product to Database Entry.')
             function.clear_screen()
-            print(Fore.GREEN + f'{name} with a price of {price} has been added to the Database, Entry ID {id_index}')
+            print(Fore.GREEN + f'{name} with a price of {price} has been added to the Database, Entry ID {id}')
         except Exception as e:
             bars.loading_info(info='Processing')
             function.clear_screen()
@@ -185,13 +165,12 @@ def add_order(f1,t1,f2,t2):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-#need to parse products list into integer list
-
 def updateOS(f1, table, f2, table2):
     while True:
         try:
             print_table(f1, table)
             id_index = int(input('Select Order #: '))
+            function.clear_screen()
             print_table(f2, table2)
             order_status = input('Select Order Status # to Update: ')
             sql = (f"UPDATE orders SET status = {order_status} WHERE id={id_index}")
@@ -208,10 +187,10 @@ def updateOS(f1, table, f2, table2):
     
     
 
-def updateOSJoin(content,content2):
-    load_database(content)
+def updateOSJoin(f1,t1, f2, t2):
+    print_table(f1,t1)
     id_index = int(input('Select Order #: '))
-    load_database(content2)
+    print_table(f2,t2)
     order_status = int(input('Select Order Status # to Update: '))
     sql = f"SELECT a.id, b.OrderID, b.status FROM orders a INNER JOIN OrderStatus b on a.id = b.status"
     execute_query(sql)
@@ -235,7 +214,7 @@ def update(f1,t1,f2,t2,f3,t3):
             function.clear_screen()
 
             print_table(f2,t2)
-            products = int(input('Select Product #: '))
+            products = input('Select Product #: ')
             sql = (f"UPDATE orders SET items = '{products}' WHERE id={id_index}")
             execute_query(sql)
             function.clear_screen()
@@ -244,9 +223,9 @@ def update(f1,t1,f2,t2,f3,t3):
             couriers = int(input('Select Courier id # to update to: '))
             sql = (f"UPDATE orders SET courier = '{couriers}' WHERE id={id_index}")
             execute_query(sql)
-
             bars.loading_info(info='Updating Couriers to Database Entry.')
             function.clear_screen()
+            
             print(Fore.GREEN + 'Name set to:'f'{customer}')
             print(Fore.GREEN + 'Address set to: ' f'{address}')
             print(Fore.GREEN + 'Phone # set to: ' f'{number}')
