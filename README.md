@@ -1,6 +1,6 @@
 ### ```Welcome to the MiniProject.```
 
-[Guide][1]
+![Guide][1]
 
 [1]: https://media.istockphoto.com/vectors/instructions-manual-concept-user-manual-flat-style-vector-concept-vector-id1165498595?k=20&m=1165498595&s=612x612&w=0&h=L9pU_d_bqf4zLUysQ1glsXut-5KT6atSm5yY1M7PFVw=
 
