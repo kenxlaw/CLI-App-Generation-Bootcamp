@@ -1,0 +1,17 @@
+cffi==1.15.0
+cryptography==3.3.2
+pycparser==2.20
+PyMySQL==0.10.1
+python-dotenv==0.15.0
+six==1.15.0
+prettytable==3.0.0
+beautifultable== 1.0.1
+colorama== 0.4.4
+termcolor== 1.1.0
+blessings== 1.7
+progress_bar==8
+pyfiglet== 0.7
+cowsay== 4.0
+loading-bars== 0.0.1
+blessed== 1.19.0
+Hershey-Fonts== 2.1.0
