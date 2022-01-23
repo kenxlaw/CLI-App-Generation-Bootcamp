@@ -2,8 +2,7 @@ import function
 import DB_Functions
 import AppMenu
 import cowsay
-from DB_Functions import DB_product, DB_courier, DB_orders, DB_OS
-from DB_Functions import DB_Pindex, DB_Cindex, DB_Oindex
+from DB_Functions import Product_DB, Courier_DB, Orders_DB, Orders_Status_DB
 from colorama import init
 from colorama import Fore, Back, Style
 import loading_bars.loading_bars as bars
@@ -47,22 +46,22 @@ while True:
                 elif product_menu == 1:
                     bars.dinamic_bar()
                     function.clear_screen()
-                    DB_Functions.print_table(DB_product,'products')
+                    DB_Functions.print_table(Product_DB) 
                     input('>>>: ')
                     function.clear_screen()
                     AppMenu.cafe2()
                     AppMenu.products_menu()
-                elif product_menu == 2:
+                elif product_menu == 2: 
                     function.clear_screen()
-                    DB_Functions.add_product('name','price')
+                    DB_Functions.add_product()
                     AppMenu.products_menu()
                 elif product_menu == 3:
                     function.clear_screen()
-                    DB_Functions.update_product(DB_product, 'products','id', 'name', 'price')
+                    DB_Functions.update_product()
                     AppMenu.products_menu()
                 elif product_menu == 4:
                     function.clear_screen()
-                    DB_Functions.delete_database(DB_Pindex,'products', 'products')
+                    DB_Functions.delete_database(Product_DB,'products')
                     AppMenu.products_menu()
     
         elif main_menu == 2:
@@ -76,22 +75,22 @@ while True:
                 elif couriers_menu == 1:
                     bars.dinamic_bar()
                     function.clear_screen()
-                    DB_Functions.print_table(DB_courier,'couriers')
+                    DB_Functions.print_table(Courier_DB)
                     input('>>>: ')
                     function.clear_screen()
                     AppMenu.cafe3()
                     AppMenu.couriers_menu()
                 elif couriers_menu == 2:
                     function.clear_screen()
-                    DB_Functions.add_courier('name','phone')
+                    DB_Functions.add_courier()
                     AppMenu.couriers_menu()
                 elif couriers_menu == 3:
                     function.clear_screen()
-                    DB_Functions.update_couriers(DB_courier,'couriers', 'id', 'name', 'phone')
+                    DB_Functions.update_couriers()
                     AppMenu.couriers_menu()
                 elif couriers_menu == 4:
                     function.clear_screen()
-                    DB_Functions.delete_database(DB_Cindex, 'couriers', 'couriers')
+                    DB_Functions.delete_database(Courier_DB,'couriers')
                     AppMenu.couriers_menu()
     
         elif main_menu == 3:
@@ -105,27 +104,27 @@ while True:
                 elif orders_menu == 1:
                     bars.dinamic_bar()
                     function.clear_screen()
-                    DB_Functions.print_table(DB_orders,'orders')
+                    DB_Functions.print_table(Orders_DB)
                     input('>>>: ')
                     function.clear_screen()
                     AppMenu.cafe4()
                     AppMenu.orders_menu()
                 elif orders_menu == 2:
                     function.clear_screen()
-                    DB_Functions.add_order(DB_courier, 'couriers', DB_product, 'products')
+                    DB_Functions.add_order()
                     AppMenu.orders_menu()
                 elif orders_menu == 3:
                     function.clear_screen()
-                    DB_Functions.updateOS(DB_Oindex, 'orders', DB_OS, 'OrderStatus')
-                    #DB_Functions.updateOSJoin('orders', 'OrderStatus')
+                    DB_Functions.updateOS()
+                    #DB_Functions.updateOSJoin() Still a WIP
                     AppMenu.orders_menu()
                 elif orders_menu == 4:
                     function.clear_screen()
-                    DB_Functions.update(DB_orders, 'orders',DB_product, 'products',DB_courier, 'couriers')
+                    DB_Functions.update_orders()
                     AppMenu.orders_menu()
                 elif orders_menu == 5:
                     function.clear_screen()
-                    DB_Functions.delete_database(DB_Oindex, 'orders', 'orders') 
+                    DB_Functions.delete_database(Orders_DB, 'orders') 
                     AppMenu.orders_menu()
                     
         else:

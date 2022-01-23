@@ -13,13 +13,13 @@ import loading_bars.loading_bars as bars
 
 init()
 
-DB_product = 'id, name, price'
-DB_courier = 'id, name, phone'
-DB_orders = 'id, customer_name, customer_address, customer_phone, courier, status, items'
 DB_OS = 'orderid, status'
-DB_Pindex ='id, name'
-DB_Cindex = 'id, name'
 DB_Oindex = 'id, customer_name, status'
+
+Product_DB = "SELECT id, name, price FROM products"
+Courier_DB = "SELECT id, name, phone FROM couriers"
+Orders_DB = "SELECT id, customer_name, customer_address, customer_phone, courier, status, items FROM orders"
+Orders_Status_DB = "SELECT id, status FROM OrderStatus"
 
 load_dotenv()
 host = os.environ.get("mysql_host")
@@ -46,7 +46,7 @@ def execute_query(sql):
     return rows
 
 
-def add_product(name,price):
+def add_product():
     while True:
         try:
             name = input('Enter New Product Name: ')
@@ -64,7 +64,7 @@ def add_product(name,price):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-def add_courier(name,phone):
+def add_courier():
     while True:
         try:
             name = input('Enter New Courier Name: ')
@@ -83,10 +83,10 @@ def add_courier(name,phone):
         break
 
 
-def update_product(field, table,id, name, price):
+def update_product():
     while True:
         try:
-            print_table(field, table)
+            print_table(Product_DB)
             id_index = int(input('Enter id # to update from database: '))
             name = input('Enter New Product Name: ')
             price = input('Enter New Product Price: ')
@@ -106,10 +106,10 @@ def update_product(field, table,id, name, price):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-def update_couriers(field, table, id, name, phone):
+def update_couriers():
     while True:
         try:
-            print_table(field, table)
+            print_table(Courier_DB)
             id_index = int(input('Enter # to update from database: '))
             name = input('Enter New Courier Name: ')
             phone = input('Enter New Courier Phone #: ')
@@ -127,10 +127,10 @@ def update_couriers(field, table, id, name, phone):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-def delete_database(field, content, table):
+def delete_database(schema, table):
     while True:
         try:
-            print_table(field, content)
+            print_table(schema)
             id_index = int(input('Enter id # to delete from database: '))
             sql = (f"DELETE FROM {table} WHERE id={id_index}")
             execute_query(sql)
@@ -143,15 +143,17 @@ def delete_database(field, content, table):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-def add_order(f1,t1,f2,t2):
+def add_order():
     while True:
         try:
             customer = input('Enter New Customer Name: ')
             address = input("Please Provide An Address: ")
             number = input("Enter New Customer's Number: ")
-            print_table(f1,t1)
+            print_table(Courier_DB)
             c_index = input('Enter a Courier id #: ')
-            print_table(f2,t2)
+            function.clear_screen()
+            
+            print_table(Product_DB)
             product = input('Enter a Product #: ')
             sql = f"INSERT INTO orders (customer_name, customer_address, customer_phone, courier, status, items) VALUES ('{customer}','{address}','{number}', '{c_index}','PREPARING', '{product}')"
             execute_query(sql)
@@ -165,13 +167,13 @@ def add_order(f1,t1,f2,t2):
             print(Fore.RED + "Restarting. Error:" + str(e))
         break
 
-def updateOS(f1, table, f2, table2):
+def updateOS():
     while True:
         try:
-            print_table(f1, table)
+            print_table(Orders_DB)
             id_index = int(input('Select Order #: '))
             function.clear_screen()
-            print_table(f2, table2)
+            print_table(Orders_Status_DB)
             order_status = input('Select Order Status # to Update: ')
             sql = (f"UPDATE orders SET status = {order_status} WHERE id={id_index}")
             execute_query(sql)
@@ -187,23 +189,19 @@ def updateOS(f1, table, f2, table2):
     
     
 
-def updateOSJoin(f1,t1, f2, t2):
-    print_table(f1,t1)
+def updateOSJoin():
+    print_table(Orders_DB)
     id_index = int(input('Select Order #: '))
-    print_table(f2,t2)
+    print_table(Orders_Status_DB)
     order_status = int(input('Select Order Status # to Update: '))
-    sql = f"SELECT a.id, b.OrderID, b.status FROM orders a INNER JOIN OrderStatus b on a.id = b.status"
+    sql= f"UPDATE orders SET status = orders.status = OrdersStatus.status[{order_status}] FROM orders O INNER JOIN OrdersStatus OS on WHERE ID = {id_index};"
     execute_query(sql)
-    sql= f"UPDATE orders SET status = {order_status} WHERE ID = {id_index};"
-    execute_query(sql)
-    sql= f"SELECT OrderStatus FROM status WHERE OrderID = {id_index}"
-    execute_query(sql)
-    
 
-def update(f1,t1,f2,t2,f3,t3):
+
+def update_orders():
     while True:
         try:
-            print_table(f1,t1)
+            print_table(Orders_DB)
 
             id_index = int(input('Select Order #: '))
             customer = input('Enter new customer name: ')
@@ -213,13 +211,13 @@ def update(f1,t1,f2,t2,f3,t3):
             execute_query(sql)
             function.clear_screen()
 
-            print_table(f2,t2)
+            print_table(Product_DB)
             products = input('Select Product #: ')
             sql = (f"UPDATE orders SET items = '{products}' WHERE id={id_index}")
             execute_query(sql)
             function.clear_screen()
 
-            print_table(f3,t3)
+            print_table(Courier_DB)
             couriers = int(input('Select Courier id # to update to: '))
             sql = (f"UPDATE orders SET courier = '{couriers}' WHERE id={id_index}")
             execute_query(sql)
@@ -239,7 +237,7 @@ def update(f1,t1,f2,t2,f3,t3):
         break
 
 
-def print_table(fieldnames,content):
+def print_table(schema):
     load_dotenv()
     host = os.environ.get("mysql_host")
     user = os.environ.get("mysql_user")
@@ -254,6 +252,6 @@ def print_table(fieldnames,content):
 
     connection = pymysql.connect(host, user, password, database, autocommit=True)
     cursor = connection.cursor()
-    cursor.execute(f"SELECT {fieldnames} FROM {content}")
+    cursor.execute(schema)
     mytable = from_db_cursor(cursor)
     print(mytable)
