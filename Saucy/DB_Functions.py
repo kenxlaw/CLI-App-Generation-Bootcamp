@@ -194,7 +194,7 @@ def updateOSJoin():
     id_index = int(input('Select Order #: '))
     print_table(Orders_Status_DB)
     order_status = int(input('Select Order Status # to Update: '))
-    sql= f"UPDATE orders SET status = orders.status = OrdersStatus.status[{order_status}] FROM orders O INNER JOIN OrdersStatus OS on WHERE ID = {id_index};"
+    sql= f"UPDATE orders SET status = orders.status = OrdersStatus.status[ {order_status}] FROM orders O INNER JOIN OrdersStatus OS on WHERE ID = {id_index};"
     execute_query(sql)
 
 
