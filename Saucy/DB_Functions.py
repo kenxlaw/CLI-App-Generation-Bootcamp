@@ -57,7 +57,7 @@ def add_product():
 
             bars.loading_info(info='Adding Product to Database Entry.')
             function.clear_screen()
-            print(Fore.GREEN + f'{name} with a price of {price} of has been added to the Database.')
+            print(Fore.GREEN + f'{name} with a price of {price} has been added to the Database.')
         except Exception as e:
             function.clear_screen()
             bars.loading_info(info='Processing')
