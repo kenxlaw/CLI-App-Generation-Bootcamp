@@ -1,4 +1,4 @@
-### ```Welcome to the MiniProject.```
+### ```Welcome to the Cafe App Python MiniProject```
 
 ![Guide][1]
 
