@@ -46,6 +46,7 @@ For example: we can see the functionality work below, when creating a new "Cocon
 <p align="center">
     <img src="Images/database.gif" width="600"/>
 </p>
+
 This extends to all additional functions such as update and delete.
 
 ## Features 
