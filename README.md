@@ -10,7 +10,7 @@
 * [Initialisation](#initialisation)
 * [Database](#database)
 * [Features](#features) 
-* [Conclusion](#Conclusion)
+* [Conclusion](#conclusion)
 
 ## Overview
 
@@ -44,7 +44,7 @@ With Adminer we can see the changes to the database reflected on upon refresh on
 For example: we can see the functionality work below, when creating a new "Coconut" product.
 
 <p align="center">
-    <img src="Images/database.gif" width="600"/>
+    <img src="Images/Database.gif" width="600"/>
 </p>
 
 This extends to all additional functions such as update and delete.
@@ -84,9 +84,9 @@ We can see the outcome of the wrong input below in red, alongside the error type
 
 ## Conclusion
 
-The project originally included reading and writing to .CSV where the app relied solely on python coding for earlier versions. <br /> 
-[Can be found in "function.py"]. <br /> 
-As the Project scope changed towards the final objective using a MYSQL Database, so did the code. <br /> 
+The project originally included reading and writing to .CSV where the app relied solely on python coding for earlier versions. <br />
+[Can be found in "function.py"]. <br />
+As the Project scope changed towards the final objective using a MYSQL Database, so did the code. <br />
 This App was an independent project that we presented to our cohorts and mentors upon reaching the deadline to demonstrate our abilities with Python3.   
 
 
