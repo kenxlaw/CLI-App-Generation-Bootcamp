@@ -75,8 +75,7 @@ break
 
 ```
 
-Another example can be seen when I input '9' on the Main Menu of the App that only accepts 4 inputs (0-3). <br />
-We can see the outcome of the wrong input below in red, alongside the error type.
+We can see the outcome of a wrong input below in red, alongside the error type printed.
 
 <p align="center">
     <img src="Images/ErrorLog.gif" width="600"/>
