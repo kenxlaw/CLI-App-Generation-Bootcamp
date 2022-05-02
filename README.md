@@ -42,6 +42,7 @@ py app.py
 
 With Adminer we can see the changes to the database reflected on upon refresh once the app has made changes. <br />
 For example: we can see the functionality work below, when creating a new "Coconut" product.
+
 <p align="center">
     <img src="Images/database.gif" width="600"/>
 </p>
