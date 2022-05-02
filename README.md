@@ -40,7 +40,7 @@ py app.py
 
 ## Database
 
-With Adminer we can see the changes to the database reflected on upon refresh once the app has made changes. <br />
+With Adminer the changes are made instantly in realtime to the database through the backend without having to close the app. Through the frontend, we can see the change to the database reflected upon site refresh. <br />
 For example: we can see the functionality work below, when creating a new "Coconut" product.
 
 <p align="center">
