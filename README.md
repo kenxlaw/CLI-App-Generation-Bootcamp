@@ -51,7 +51,7 @@ This extends to all additional functions such as update and delete.
 
 ## Features 
 
-Tradionally pythons CLI Terminals do not come with visual aid so I used packages installed from NPM to supplement the UI aspect of the front end. With the use of packages, I was able to utitlise colours, Menu ASCII Art, loading bars, tables and cowsay features to give an element of interactivity to a CLI app.
+Tradionally Python's CLI Terminals do not come with visual aid so I used packages installed from NPM to supplement the UI aspect of the front end. With the use of packages, I was able to utitlise colours, Menu ASCII Art, loading bars, tables and cowsay features to give an element of interactivity to a CLI app.
 
 <p align="center">
     <img src="Images/Feature.gif" width="600"/>
