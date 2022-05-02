@@ -84,7 +84,7 @@ We can see the outcome of the wrong input below in red, alongside the error type
 
 ## Conclusion
 
-The project originally included reading and writing to .CSV where the app relied solely on python coding for earlier versions. [Can be found in "function.py"]. <br /> 
-As the Project scope changed towards the final objective using a MYSQL Database, so did the code. This App was an independent project that we presented to our cohorts and mentors upon reaching the deadline to demonstrate our abilities with Python3.   
+The project originally included reading and writing to .CSV where the app relied solely on python coding for earlier versions. <br /> [Can be found in "function.py"]. <br /> 
+As the Project scope changed towards the final objective using a MYSQL Database, so did the code. <br /> This App was an independent project that we presented to our cohorts and mentors upon reaching the deadline to demonstrate our abilities with Python3.   
 
 
